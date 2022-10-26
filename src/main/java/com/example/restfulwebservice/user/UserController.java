@@ -23,6 +23,10 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User retrieveUser(@PathVariable int id) {
         User user = service.findOne(id);
+
+        if(user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
         return user; }
 
     @PostMapping("/users")
@@ -37,5 +41,14 @@ public class UserController {
 
     }
 
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id) {
+        User user = service.deleteById(id);
+
+        if (user == null){
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
+
+    }
 
 }
