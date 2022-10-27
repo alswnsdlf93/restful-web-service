@@ -18,7 +18,8 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> retrieveAllUsers() { return service.findAll(); }
+    public List<User> retrieveAllUsers() {
+        return service.findAll(); }
 
     // GET /users/1 자번 사용자 or / users/ 10 번 사용
     @GetMapping("/users/{id}")
