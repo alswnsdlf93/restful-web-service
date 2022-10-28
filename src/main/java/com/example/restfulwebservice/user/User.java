@@ -11,6 +11,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+@JsonIgnoreProperties
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
