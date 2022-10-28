@@ -41,10 +41,7 @@ public class AdminUserController {
 
     // GET /admin/users/1 -> /admin/v1/users/1
 
-    // @GetMapping("v1/users/{id}")
-    // @GetMapping(value = "/users/{id}/", params = "version=1")
-    // @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1")
-    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv1+json")
+    @GetMapping("v1/users/{id}")
     public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
         User user = service.findOne(id);
 
@@ -63,10 +60,7 @@ public class AdminUserController {
         return mapping;
     }
 
-    // @GetMapping("v2/users/{id}")
-    // @GetMapping(value = "/users/{id}/", params = "version=2")
-    // @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=2")
-    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv2+json")
+    @GetMapping("v2/users/{id}")
     public MappingJacksonValue retrieveUserV2(@PathVariable int id) {
         User user = service.findOne(id);
 
@@ -74,10 +68,10 @@ public class AdminUserController {
             throw new UserNotFoundException(String.format("ID[%s] not found", id));
         }
 
-        // User -> UserV2
         UserV2 userV2 = new UserV2();
-        BeanUtils.copyProperties(user, userV2); // id, name, joinDate, password, ssn
+        BeanUtils.copyProperties(user, userV2);
         userV2.setGrade("VIP");
+
 
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
                 .filterOutAllExcept("id", "name", "joinDate", "grade");

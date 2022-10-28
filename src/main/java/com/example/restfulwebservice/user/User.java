@@ -11,12 +11,11 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-@JsonIgnoreProperties
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
 // @JsonIgnoreProperties(value={"password"})
-// @JsonFilter("UserInfo")
+@JsonFilter("UserInfo")
 public class User {
     private Integer id;
 
